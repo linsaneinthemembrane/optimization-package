@@ -1,3 +1,5 @@
 from .optimizer import Optimizer
-from .templates import generate_template
-from .ui import display_latex_with_tooltip
+from .ui import DisplayUI
+from .templates import generate_template, format_problem
+
+__all__ = ["Optimizer", "DisplayUI", "generate_template", "format_problem"]
