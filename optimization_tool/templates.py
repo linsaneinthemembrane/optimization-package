@@ -1,10 +1,42 @@
-def generate_template():
+def generate_template(num_variables=2):
     template = {
-        "objective_function": "maximize/minimize c1*x1 + c2*x2 + ... + cn*xn",
+        "objective_function": {
+            "type": "maximize",
+            "coefficients": [1] * num_variables
+        },
         "constraints": [
-            "a11*x1 + a12*x2 + ... + a1n*xn <= b1",
-            "a21*x1 + a22*x2 + ... + a2n*xn = b2"
+            {
+                "coefficients": [1] * num_variables,
+                "bound": 10,
+                "type": "<="
+            }
         ],
-        "variables": "x1, x2, ..., xn >= 0"
+        "bounds": [(0, 100)] * num_variables
     }
     return template
+
+def format_problem(template):
+    obj_type = template["objective_function"]["type"]
+    obj_coeffs = template["objective_function"]["coefficients"]
+    
+    # Format objective function
+    obj_terms = [f"{c if c != 1 else ''}x_{{{i+1}}}" for i, c in enumerate(obj_coeffs)]
+    obj_str = f"{obj_type} \\space {' + '.join(obj_terms)}"
+    
+    # Format constraints
+    constraints = []
+    for constraint in template["constraints"]:
+        coeffs = constraint["coefficients"]
+        bound = constraint["bound"]
+        ctype = constraint["type"]
+        terms = [f"{c if c != 1 else ''}x_{{{i+1}}}" for i, c in enumerate(coeffs)]
+        constraints.append(f"{' + '.join(terms)} {ctype} {bound}")
+    
+    # Format bounds
+    bounds = [f"{l} \\leq x_{{{i+1}}} \\leq {u}" for i, (l, u) in enumerate(template["bounds"])]
+    
+    return {
+        "objective": obj_str,
+        "constraints": constraints,
+        "bounds": bounds
+    }
