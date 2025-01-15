@@ -4,6 +4,8 @@ from scipy.optimize import linprog
 def simplex_solver(objective_coeffs, optimization_type="minimize", constraints=None, bounds=None):
     # don't negate for minimization
     c = np.array(objective_coeffs, dtype=float)
+    if optimization_type == 'maximize':
+        c = -c
     
     # Process constraints
     A_ub = []
