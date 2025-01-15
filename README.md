@@ -1,6 +1,7 @@
 # Linear Programming Optimization Tool
 
 An interactive web application for solving linear programming problems using the Simplex method. Built with Streamlit and Python, this tool provides a user-friendly interface for defining and solving optimization problems. 
+
 Originally, this project started with trying to create my own optimization problem-solving algorithm but pivoted to focus on building a user interface for existing solvers. This pivot allowed for a deeper exploration of front-end development and application architecture.
 
 ## Features
