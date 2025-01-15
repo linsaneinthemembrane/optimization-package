@@ -2,8 +2,10 @@ import numpy as np
 from scipy.optimize import linprog
 
 def simplex_solver(objective_coeffs, optimization_type="minimize", constraints=None, bounds=None):
-    # don't negate for minimization
+    # Convert to numpy array
     c = np.array(objective_coeffs, dtype=float)
+    
+    # Negate for maximization
     if optimization_type == 'maximize':
         c = -c
     
@@ -19,9 +21,8 @@ def simplex_solver(objective_coeffs, optimization_type="minimize", constraints=N
             bound_val = float(bound)
             
             if ctype == '>=':
-                # Negate both coefficients and bound for >= constraints
-                A_ub.append(-coeffs_array)  # Negate all coefficients
-                b_ub.append(-bound_val)     # Negate the bound
+                A_ub.append(-coeffs_array)
+                b_ub.append(-bound_val)
             elif ctype == '<=':
                 A_ub.append(coeffs_array)
                 b_ub.append(bound_val)
@@ -42,17 +43,18 @@ def simplex_solver(objective_coeffs, optimization_type="minimize", constraints=N
         A_eq=A_eq,
         b_eq=b_eq,
         bounds=bounds,
-        method='highs' #Using a built in highs solver from scipy
+        method='highs'
     )
+    
+    # Adjust the objective value for maximization problems
+    fun = -result.fun if optimization_type == 'maximize' else result.fun
     
     return {
         'success': result.success,
         'x': result.x,
-        'fun': result.fun,  
+        'fun': fun,  
         'message': result.message
     }
 
-
-
-# Add alias to account for function name change
+# Add alias for backward compatibility
 custom_solver = simplex_solver
