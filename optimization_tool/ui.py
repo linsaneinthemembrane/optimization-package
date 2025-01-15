@@ -43,7 +43,7 @@ class DisplayUI:
         if num_vars != st.session_state.num_vars:
             st.session_state.num_vars = num_vars
             self.update_template_for_new_vars(num_vars)
-            st.experimental_rerun()
+            st.rerun()
         
         new_coeffs = []
         for i in range(num_vars):
@@ -83,14 +83,21 @@ class DisplayUI:
         st.subheader("Constraints")
         num_vars = len(self.template["objective_function"]["coefficients"])
         
-        if st.button("Add Constraint"):
-            new_constraint = {
-                "coefficients": [0] * num_vars,
-                "bound": 0,
-                "type": "<="
-            }
-            self.template["constraints"].append(new_constraint)
-            st.experimental_rerun()
+        col1, col2 = st.columns([1, 1])
+        with col1:
+            if st.button("Add Constraint"):
+                new_constraint = {
+                    "coefficients": [0] * num_vars,
+                    "bound": 0,
+                    "type": "<="
+                }
+                self.template["constraints"].append(new_constraint)
+                st.rerun()
+
+        with col2:
+            if st.button("Remove Constraint") and len(self.template["constraints"]) > 0:
+                self.template["constraints"].pop()
+                st.rerun()
         
         # Clear existing constraints in the optimizer
         self.optimizer.constraints = []
