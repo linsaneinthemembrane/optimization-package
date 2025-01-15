@@ -1,4 +1,5 @@
 def generate_template(num_variables=2):
+    """Generate default template for Streamlit."""
     template = {
         "objective_function": {
             "type": "maximize",
@@ -16,6 +17,7 @@ def generate_template(num_variables=2):
     return template
 
 def format_problem(template):
+    """Using LaTeX formatting."""
     obj_type = template["objective_function"]["type"]
     obj_coeffs = template["objective_function"]["coefficients"]
     
