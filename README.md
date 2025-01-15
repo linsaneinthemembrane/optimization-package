@@ -8,8 +8,7 @@ Originally, this project started with trying to create my own optimization probl
 
 - Interactive UI for defining optimization problems
 - Support for both maximization and minimization problems
-- Dynamic variable management (add/remove variables)
-- Constraint management system (add/remove constraints)
+- Dynamic variable and constraint management (-/+)
 - Variable bounds configuration
 - Real-time LaTeX rendering of mathematical expressions
 - Utilizes HiGHS solver for optimization
