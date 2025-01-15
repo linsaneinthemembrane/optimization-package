@@ -1,5 +1,5 @@
 import streamlit as st
-from optimizer_tool.ui import DisplayUI
+from optimization_tool.ui import DisplayUI
 
 def main():
     ui = DisplayUI()
