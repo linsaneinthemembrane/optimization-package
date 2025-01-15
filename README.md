@@ -12,6 +12,27 @@ An interactive web application for solving linear programming problems using the
 - Real-time LaTeX rendering of mathematical expressions
 - Utilizes HiGHS solver for optimization
 
+## Learning Outcomes
+
+### Streamlit Development
+- Built interactive web apps with Streamlit's component system
+- Managed application state using `st.session_state`
+- Created dynamic UI elements with real-time updates
+- Implemented form validation and error handling[3]
+
+### Frontend Design
+- Rendered mathematical expressions using LaTeX in Streamlit[3]
+- Designed responsive layouts with column systems
+- Created intuitive interfaces for complex mathematical input[3]
+- Developed real-time result visualization
+
+### Architecture Skills
+- Structured modular Python applications[1]
+- Separated concerns between UI, business logic, and computation[2][3]
+- Integrated third-party optimization solvers[4]
+- Managed state across multiple components[3]
+
+
 ## Installation
 
 1. Clone the repository:
